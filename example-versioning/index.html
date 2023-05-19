@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hacker Theme Image Prediction</title>
+	<style>
+		body {
+			background-color: #000;
+			color: #0F0;
+			font-family: 'Courier New', monospace;
+		}
+		h1 {
+			color: #0F0;
+			text-align: center;
+		}
+		form {
+			margin: 20px auto;
+			max-width: 600px;
+			text-align: center;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+		input[type="file"] {
+			display: none;
+		}
+		.upload-btn {
+			background-color: #0F0;
+			color: #000;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		.upload-btn:hover {
+			background-color: #000;
+			color: #0F0;
+		}
+		.predict-btn {
+			background-color: #0F0;
+			color: #000;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		.predict-btn:hover {
+			background-color: #000;
+			color: #0F0;
+		}
+	</style>
+</head>
+<body>
+	<h1>Image Prediction</h1>
+	<form action="#" method="post">
+		<label for="image-upload">Upload an Image:</label>
+		<input type="file" id="image-upload">
+		<button class="upload-btn" type="button">Choose File</button>
+		<button class="predict-btn" type="submit">Predict</button>
+	</form>
+	<script>
+		const uploadBtn = document.querySelector('.upload-btn');
+		const fileInput = document.querySelector('#image-upload');
+		uploadBtn.addEventListener('click', function() {
+			fileInput.click();
+		});
+	</script>
+</body>
+</html>
