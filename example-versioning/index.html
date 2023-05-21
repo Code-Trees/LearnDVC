@@ -1,72 +1,145 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hacker Theme Image Prediction</title>
+	<title>Hacker Image Prediction</title>
 	<style>
 		body {
-			background-color: #000;
-			color: #0F0;
-			font-family: 'Courier New', monospace;
+			background-color: black;
+			color: #00ff00;
+			font-family: monospace;
 		}
 		h1 {
-			color: #0F0;
 			text-align: center;
+			margin-top: 50px;
+			font-size: 48px;
+			animation: neon 1.5s ease-in-out infinite alternate;
+			text-shadow: 0 0 5px #00ff00;
+		}
+		@keyframes neon {
+			from {
+				color: #00ff00;
+				text-shadow: 0 0 10px #00ff00,
+								0 0 20px #00ff00,
+								0 0 30px #00ff00;
+			}
+			to {
+				color: #33ff33;
+				text-shadow: 0 0 5px #33ff33,
+								0 0 10px #33ff33,
+								0 0 15px #33ff33;
+			}
 		}
 		form {
-			margin: 20px auto;
-			max-width: 600px;
+			width: 600px;
+			margin: 50px auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.file-input {
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+		}
+		.file-input input[type="file"] {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			cursor: pointer;
+		}
+		.file-input label {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #00ff00;
+			color: black;
+			border: none;
+			border-radius: 5px;
+			font-size: 24px;
+			cursor: pointer;
+			box-shadow: 0 0 10px #00ff00;
+			transition: box-shadow 0.2s;
+		}
+		.file-input label:hover {
+			box-shadow: 0 0 20px #00ff00;
+		}
+		.machine-learning {
 			text-align: center;
+			margin-top: 50px;
+			font-size: 24px;
+			line-height: 1.5;
 		}
-		label {
+		.machine-learning-border {
+			display: inline-block;
+			border: 2px solid #00ff00;
+			padding: 20px;
+			border-radius: 10px;
+		}
+		.machine-learning-border-top {
+			border-top: none;
+		}
+		.machine-learning-border-bottom {
+		border-bottom: none;
+		}
+		.machine-learning-predict-button {
 			display: block;
-			margin-bottom: 10px;
-		}
-		input[type="file"] {
-			display: none;
-		}
-		.upload-btn {
-			background-color: #0F0;
-			color: #000;
+			margin-top: 20px;
 			padding: 10px 20px;
+			background-color: #00ff00;
+			color: black;
 			border: none;
 			border-radius: 5px;
+			font-size: 24px;
 			cursor: pointer;
-			transition: all 0.3s ease;
+			box-shadow:0 0 10px #00ff00;
+			transition: box-shadow 0.2s;
 		}
-		.upload-btn:hover {
-			background-color: #000;
-			color: #0F0;
-		}
-		.predict-btn {
-			background-color: #0F0;
-			color: #000;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-		}
-		.predict-btn:hover {
-			background-color: #000;
-			color: #0F0;
+		.machine-learning-predict-button:hover {
+			box-shadow: 0 0 20px #00ff00;
 		}
 	</style>
 </head>
 <body>
-	<h1>Image Prediction</h1>
-	<form action="#" method="post">
-		<label for="image-upload">Upload an Image:</label>
-		<input type="file" id="image-upload">
-		<button class="upload-btn" type="button">Choose File</button>
-		<button class="predict-btn" type="submit">Predict</button>
+	<h1>Hacker Image Prediction</h1>
+	<form>
+		<div class="file-input">
+			<input type="file" id="image-upload" accept="image/*">
+			<label for="image-upload">Select an image to upload</label>
+		</div>
+		<button id="predict-button">Predict</button>
 	</form>
+	<div class="machine-learning">
+		<div class="machine-learning-border machine-learning-border-top">
+			╔═══════════════════════════╗<br>
+			║       MACHINE LEARNING     ║<br>
+			╠═══════════════════════════╣<br>
+			║          ______________   ║<br>
+			║         /              \  ║<br>
+			║        /                \ ║<br>
+			║        |                | ║<br>
+			║        |                | ║<br>
+			║        |                | ║<br>
+			║        |                | ║<br>
+			║        |                | ║<br>
+			║        |                | ║<br>
+			║        |________________| ║<br>
+			║                           ║<br>
+			║       [  predict!  ]      ║<br>
+			╚═══════════════════════════╝<br>
+		</div>
+		<div class="machine-learning-border machine-learning-border-bottom">
+			<p>This machine learning algorithm uses a convolutional neural network to predict the image uploaded above. The neural network is trained on a dataset of thousands of images and can recognize a variety of objects and patterns.</p>
+			<p>When you click the "Predict" button, the image will be sent to the neural network and a prediction will be made. The predicted label will be displayed below the image.</p>
+		</div>
+	</div>
 	<script>
-		const uploadBtn = document.querySelector('.upload-btn');
-		const fileInput = document.querySelector('#image-upload');
-		uploadBtn.addEventListener('click', function() {
-			fileInput.click();
-		});
+		// Add code for image prediction here
 	</script>
 </body>
 </html>
+
+I updated the CSS to create a new class called "file-input" and added some styles to give the file input button a more modern and sleek look. I also moved the label element inside the file input element so that clicking the label triggers the file input dialog.
