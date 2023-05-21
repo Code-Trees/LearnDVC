@@ -4,7 +4,7 @@ from torchvision import transforms,models
 from PIL import Image
 from torchvision.models import resnet50, ResNet50_Weights
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 
 # Load the PyTorch model
 model = models.alexnet(pretrained=True)
