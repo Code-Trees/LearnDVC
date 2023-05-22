@@ -7,6 +7,9 @@ from PIL import Image
 import json
 import io
 import base64
+from datetime import datetime
+
+now = datetime.now()
 
 app = Flask(__name__,template_folder='tempelate')
 app.config['UPLOAD_FOLDER'] = 'tempelate'
@@ -66,26 +69,37 @@ def predict_image():
     # Check if the file is allowed
     if file and allowed_file(file.filename):
         # Save the file to the uploads folder
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        try:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            img.show()
 
-        # Make a prediction using the ResNet model
-        prediction = predict(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        prediction = str([[i[0][1],i[1]] for i in prediction])
+            data = io.BytesIO()
+            img.save(data, "JPEG")
 
-        img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        data = io.BytesIO()
-        img.save(data, "JPEG")
-        encoded_img_data = base64.b64encode(data.getvalue())
-        
-        # Delete the uploaded file
-        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            encoded_img_data = base64.b64encode(data.getvalue())
+
+            # Make a prediction using the ResNet model
+            prediction = predict(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            prediction = str([[i[0][1],i[1]] for i in prediction])
+            encoded_img_data = base64.b64encode(data.getvalue())
+
+        except:
+            prediction = "Upload JPEG "
+            encoded_img_data = 'pass'
+
+        # # Delete the uploaded file
+        # os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         # Return the prediction to the HTML page
         return render_template('index.html', user_image=encoded_img_data ,prediction=prediction)
 
     # If the file is not allowed or not uploaded, redirect to the homepage
-    return redirect(url_for('index'))
+    prediction = "Upload Image with JPEG extention"
+    encoded_img_data = 'pass'
+    return render_template('index.html', user_image=encoded_img_data ,prediction=prediction)
+
 
 # Run the Flask app
 if __name__ == '__main__':
