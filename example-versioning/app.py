@@ -51,7 +51,7 @@ def predict(image_path):
     top5_names = [labels[str(c.item())] for c in top5_classes]
 
     # Return the top 5 predicted classes and their probabilities
-    return str(list(zip(top5_names, top5_probs.tolist())))
+    return list(zip(top5_names, top5_probs.tolist()))
 
 # Define the Flask routes
 @app.route('/')
@@ -71,7 +71,8 @@ def predict_image():
 
         # Make a prediction using the ResNet model
         prediction = predict(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        
+        prediction = str([[i[0][1],i[1]] for i in prediction])
+
         img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         data = io.BytesIO()
         img.save(data, "JPEG")
