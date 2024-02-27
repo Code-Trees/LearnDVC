@@ -126,4 +126,3 @@ def train_top_model():
 
 save_bottlebeck_features()
 train_top_model()
-print("Status 0")
